@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Best Coffee in LA</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+  
+  <style>
+    #map {
+      height: 90vh;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+  <h2 style="text-align:center;">☕ Best Coffee Shops in LA ☕</h2>
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+  
+  <script>
+    // Initialize map centered on Los Angeles
+    var map = L.map('map').setView([34.05, -118.25], 11);
+
+    // Base map tiles from OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '&copy; OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Custom coffee cup icon
+    var coffeeIcon = L.icon({
+      iconUrl: 'https://cdn-icons-png.flaticon.com/512/4151/4151746.png',
+      iconSize: [32, 32],
+      iconAnchor: [16, 32],
+      popupAnchor: [0, -30]
+    });
+
+    // Coffee shop data
+    var coffeeShops = [
+      {
+        name: "Alfred's",
+        lat: 34.0837,
+        lng: -118.3656,
+        menu: "Coconut Cloud",
+        location: "Melrose",
+        taste: "Very good",
+        student: "Yes",
+        ambiance: "Nice, Seating inside+outside"
+      },
+      {
+        name: "Groundwork",
+        lat: 34.0832,
+        lng: -118.3277,
+        menu: "Beehive Matcha",
+        location: "Larchmont",
+        taste: "V. Very good",
+        student: "Yes",
+        ambiance: "Nice, Seating inside+outside"
+      },
+      {
+        name: "Mandarin Coffee",
+        lat: 34.1478,
+        lng: -118.1445,
+        menu: "Vienna Latte",
+        location: "Pasadena",
+        taste: "Very Good",
+        student: "Kind of",
+        ambiance: "Nice, But Small Seating"
+      },
+      {
+        name: "Coffee and Plants",
+        lat: 34.1469,
+        lng: -118.1397,
+        menu: "Pink Matcha",
+        location: "Pasadena",
+        taste: "Good, not bitter",
+        student: "Yes, but limited",
+        ambiance: "Nice/Cozy"
+      },
+      {
+        name: "Hilltop Coffee",
+        lat: 33.9617,
+        lng: -118.3531,
+        menu: "Vanilla Latte",
+        location: "Inglewood",
+        taste: "Good",
+        student: "Yes",
+        ambiance: "Nice/Cozy/ Many Seats"
+      },
+      {
+        name: "The Baker, The Butcher, The Cappacino Maker",
+        lat: 34.09,
+        lng: -118.3617,
+        menu: "Colorburst Latte",
+        location: "West Hollywood",
+        taste: "OK, the food is better",
+        student: "Yes, but gets crowded",
+        ambiance: "Nice, Seating inside+outside"
+      },
+      {
+        name: "Memorylook",
+        lat: 34.0469,
+        lng: -118.2519,
+        menu: "Einspänner Latte",
+        location: "DTLA",
+        taste: "Very Good",
+        student: "Yes",
+        ambiance: "Nice, Seating inside+outside"
+      },
+      {
+        name: "Philz Coffee",
+        lat: 34.0211,
+        lng: -118.3965,
+        menu: "Oatmeal Cookie",
+        location: "Culver City",
+        taste: "Very Good",
+        student: "Yes, but limited",
+        ambiance: "Nice, Seating inside+outside"
+      },
+      {
+        name: "Republik Coffee",
+        lat: 34.1486,
+        lng: -118.1386,
+        menu: "Cardamom Oat",
+        location: "Pasadena",
+        taste: "Very Good",
+        student: "Yes, but gets crowded",
+        ambiance: "Nice, Seating inside+outside"
+      }
+    ];
+
+    // Add all coffee shops to map
+    coffeeShops.forEach(function(shop) {
+      L.marker([shop.lat, shop.lng], { icon: coffeeIcon }).addTo(map)
+        .bindPopup(
+          `<b>${shop.name}</b><br>
+          <i>${shop.menu}</i><br>
+          <b>Location:</b> ${shop.location}<br>
+          <b>Taste:</b> ${shop.taste}<br>
+          <b>Student Friendly:</b> ${shop.student}<br>
+          <b>Ambiance:</b> ${shop.ambiance}`
+        );
+    });
+  </script>
+</body>
+</html>
